@@ -1,0 +1,30 @@
+spring:
+  application:
+  name: ecommerce
+  datasource:
+    url: jdbc:postgresql://localhost:5433/ecommerce
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+  cache:
+    type: redis
+    redis:
+      host: localhost
+      port: 6379
+      redis:
+          time-to-live: 60000
+springdoc:
+  pathsToMatch:
+    - /products
+    - /sales
+  swagger-ui:
+    use-root-path: true
