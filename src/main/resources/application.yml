@@ -1,10 +1,17 @@
+cors:
+  originPatterns: http://localhost:8080
+security:
+  jwt:
+    token:
+      secret-key: 53cr37
+      expire-length: 3600000
 spring:
   application:
   name: ecommerce
   datasource:
-    url: jdbc:postgresql://localhost:5433/ecommerce
+    url: jdbc:postgresql://localhost:5432/ecommerce
     username: postgres
-    password: root
+    password: admin
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
@@ -22,9 +29,23 @@ spring:
       port: 6379
       redis:
           time-to-live: 60000
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tiranodarklck@gmail.com
+    password: wfbq adqo wptq hqwg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 springdoc:
   pathsToMatch:
-    - /products
-    - /sales
+    - /api/products/**
+    - /api/sales/**
+    - /api/users/**
+    - /api/permissions/**
+    - /api/reset-password/**
   swagger-ui:
     use-root-path: true

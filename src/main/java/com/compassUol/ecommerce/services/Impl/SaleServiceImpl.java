@@ -9,14 +9,18 @@ import com.compassUol.ecommerce.mapper.SaleMapper;
 import com.compassUol.ecommerce.models.Product;
 import com.compassUol.ecommerce.models.Sale;
 import com.compassUol.ecommerce.models.SaleItem;
+import com.compassUol.ecommerce.models.User;
 import com.compassUol.ecommerce.repositories.ProductRepository;
 import com.compassUol.ecommerce.repositories.SaleRepository;
+import com.compassUol.ecommerce.repositories.UserRepository;
 import com.compassUol.ecommerce.services.SaleService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -27,12 +31,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class SaleServiceImpl implements SaleService {
-
     @Autowired
     private SaleRepository saleRepository;
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private SaleMapper saleMapper;
@@ -67,8 +73,14 @@ public class SaleServiceImpl implements SaleService {
             return item;
         }).collect(Collectors.toList());
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = ((UserDetails) authentication.getPrincipal()).getUsername();
+
+        User currentUser = userRepository.findByUsername(currentUserName);
+
         sale.setItems(items);
         sale.setTotalAmount(totalAmountWrapper.getTotalAmount());
+        sale.setUser(currentUser);
         sale = saleRepository.save(sale);
 
         return saleMapper.convertToDTO(sale);

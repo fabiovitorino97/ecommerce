@@ -21,6 +21,10 @@ public class Sale {
     @Column(nullable = false)
     private BigDecimal totalAmount;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @PrePersist
     protected void onCreate() {
         saleDate = LocalDateTime.now();
@@ -59,5 +63,13 @@ public class Sale {
 
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

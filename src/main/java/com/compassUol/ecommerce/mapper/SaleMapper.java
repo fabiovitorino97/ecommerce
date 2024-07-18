@@ -19,7 +19,8 @@ public class SaleMapper {
                 sale.getId(),
                 sale.getSaleDate(),
                 itemDTOs,
-                sale.getTotalAmount()
+                sale.getTotalAmount(),
+                sale.getUser().getUserName()
         );
     }
 

@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductDTO update(Long id, ProductDTO productDTO) {
         Product existingProduct = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
+
         existingProduct.setName(productDTO.name());
         existingProduct.setPrice(productDTO.price());
         existingProduct.setStock(productDTO.stock());
