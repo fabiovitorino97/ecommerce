@@ -64,7 +64,7 @@ JSON2  {
 
 TERCEIRO PASSO:
 
-POST http://localhost:8080/products
+POST http://localhost:8080/api/products
 
 JSON: 	{
 		"name": "Product 1",
@@ -101,28 +101,28 @@ JSON: 	{
 		"active": true
         }
 
-GET http://localhost:8080/products
+GET http://localhost:8080/api/products
 RETORNA TODOS OS PRODUTOS ATIVOS
 
-GET http://localhost:8080/products/id
+GET http://localhost:8080/api/products/id
 RETORNA O PRODUTO PELO ID INFORMADO
 
-PUT http://localhost:8080/products/id
+PUT http://localhost:8080/api/products/id
 JSON: 	{
 		"name": "Product A",
 		"price": 15.00,
 		"stock": 90,
-		"active": false
+		"active": true
 	    }
 
-DELETE http://localhost:8080/products/id
+DELETE http://localhost:8080/api/products/id
 DESATIVA A VENDA INFORMADO PELO ID
 
 
 
 QUARTO PASSO:
 
-POST http://localhost:8080/sales
+POST http://localhost:8080/api/sales
 
 JSON: 	{
                 "items": [
@@ -189,10 +189,10 @@ JSON5: 	{
                 ]
         }
 
-POST http://localhost:8080/sales
+GET http://localhost:8080/api/sales
 RETORNA TODAS AS VENDAS CADASTRADAS
 
-POST http://localhost:8080/sales/id
+GET http://localhost:8080/api/sales/id
 RETORNA UMA VENDA PELO ID INFORMADO
 
 PUT http://localhost:8080/sales/id
@@ -209,13 +209,13 @@ JSON : 	{
     		]
 	}
 
-DELETE http://localhost:8080/sales/id
+DELETE http://localhost:8080/api/sales/id
 DELETA A VENDA PELO ID INFORMADO
 
-GET http://localhost:8080/sales/date?date={date} (EXEMPLO: http://localhost:8080/sales/date?date=2023-07-06)
+GET http://localhost:8080/api/sales/date?date={date} (EXEMPLO: http://localhost:8080/api/sales/date?date=2024-07-23)
 FILTRA VENDAS PELA DATA INFORMADA
 
-GET http://localhost:8080/sales/report/monthly?year=2023&month=7 (EXEMPLO: http://localhost:8080/sales/report/monthly?year=2024&month=7)
+GET http://localhost:8080/api/sales/report/monthly?year=2024&month=7 (EXEMPLO: http://localhost:8080/sales/report/monthly?year=2024&month=7)
 RELATORIO MENSAL DE VENDAS
 
 
@@ -224,5 +224,6 @@ QUINTO PASSO:
 
 POST http://localhost:8080/api/reset-password/request?username=admin
 
-POST http://localhost:8080/api/reset-password?token=d65b128f-05d4-4885-9a82-2ca45df48279&newPassword=NovaSenha123
+POST http://localhost:8080/api/reset-password/reset?token=5826053b-6661-4eab-8c06-f497af5052ae&newPassword=NovaSenha123
 
+5826053b-6661-4eab-8c06-f497af5052ae
